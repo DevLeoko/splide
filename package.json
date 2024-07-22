@@ -1,5 +1,5 @@
 {
-  "name": "@splidejs/splide",
+  "name": "@leoko/splide",
   "version": "4.1.4",
   "description": "Splide is a lightweight, flexible and accessible slider/carousel. No dependencies, no Lighthouse errors.",
   "author": "Naotoshi Fujita",
