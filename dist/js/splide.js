@@ -6,7 +6,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
  * Splide.js
  * Version  : 4.1.4
  * License  : MIT
- * Copyright: 2022 Naotoshi Fujita
+ * Copyright: 2024 Naotoshi Fujita
  */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() : typeof define === 'function' && define.amd ? define(factory) : (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.Splide = factory());
@@ -2209,7 +2209,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           clickPrevented = true;
           emit(EVENT_DRAGGING);
           prevent(e);
-        } else if (isSliderDirection(e)) {
+        } else if (isSliderDirection(e) && !hasMultiplePointers(e)) {
           dragging = shouldStart(e);
           prevent(e);
         }
@@ -2273,6 +2273,10 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     function isSliderDirection(e) {
       return abs(diffCoord(e)) > abs(diffCoord(e, true));
+    }
+
+    function hasMultiplePointers(e) {
+      return isTouchEvent(e) && e.touches.length > 1;
     }
 
     function computeVelocity(e) {

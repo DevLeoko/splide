@@ -2,7 +2,7 @@
  * Splide.js
  * Version  : 4.1.4
  * License  : MIT
- * Copyright: 2022 Naotoshi Fujita
+ * Copyright: 2024 Naotoshi Fujita
  */
 'use strict';
 
@@ -2216,7 +2216,7 @@ function Drag(Splide2, Components2, options) {
         clickPrevented = true;
         emit(EVENT_DRAGGING);
         prevent(e);
-      } else if (isSliderDirection(e)) {
+      } else if (isSliderDirection(e) && !hasMultiplePointers(e)) {
         dragging = shouldStart(e);
         prevent(e);
       }
@@ -2280,6 +2280,10 @@ function Drag(Splide2, Components2, options) {
 
   function isSliderDirection(e) {
     return abs(diffCoord(e)) > abs(diffCoord(e, true));
+  }
+
+  function hasMultiplePointers(e) {
+    return isTouchEvent(e) && e.touches.length > 1;
   }
 
   function computeVelocity(e) {
