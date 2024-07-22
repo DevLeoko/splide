@@ -162,7 +162,7 @@ export function Drag( Splide: Splide, Components: Components, options: Options )
         clickPrevented = true;
         emit( EVENT_DRAGGING );
         prevent( e );
-      } else if ( isSliderDirection( e ) ) {
+      } else if ( isSliderDirection( e ) && ! hasMultiplePointers( e ) ) {
         dragging = shouldStart( e );
         prevent( e );
       }
@@ -267,6 +267,17 @@ export function Drag( Splide: Splide, Components: Components, options: Options )
    */
   function isSliderDirection( e: TouchEvent | MouseEvent ): boolean {
     return abs( diffCoord( e ) ) > abs( diffCoord( e, true ) );
+  }
+
+  /**
+   * Checks if the event has multiple pointers.
+   * 
+   * @param e - The touch event or mouse event.
+   * 
+   * @returns A boolean indicating whether the event has multiple pointers.
+   */
+  function hasMultiplePointers( e: TouchEvent | MouseEvent ): boolean {
+    return isTouchEvent( e ) && e.touches.length > 1;
   }
 
   /**
